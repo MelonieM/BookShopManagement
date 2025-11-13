@@ -1,0 +1,96 @@
+﻿<Page x:Class="BookShopManagement.Pages.CustomersPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Title="Customers Management">
+
+    <Page.Resources>
+        <Style x:Key="ActionButton" TargetType="Button">
+            <Setter Property="Padding" Value="15,8"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" 
+                                CornerRadius="5" 
+                                Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center" 
+                                            VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Page.Resources>
+
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Title -->
+        <TextBlock Grid.Row="0" 
+                   Text="👥 Customer Management" 
+                   FontSize="28" 
+                   FontWeight="Bold" 
+                   Foreground="#333"
+                   Margin="0,0,0,20"/>
+
+        <!-- Action Buttons -->
+        <Grid Grid.Row="1" Margin="0,0,0,20">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button x:Name="BtnAdd" 
+                        Content="➕ Add Customer" 
+                        Style="{StaticResource ActionButton}"
+                        Background="#4CAF50"
+                        Click="BtnAdd_Click"/>
+                <Button x:Name="BtnEdit" 
+                        Content="✏️ Edit" 
+                        Style="{StaticResource ActionButton}"
+                        Background="#FF9800"
+                        Click="BtnEdit_Click"/>
+                <Button x:Name="BtnDelete" 
+                        Content="🗑️ Delete" 
+                        Style="{StaticResource ActionButton}"
+                        Background="#F44336"
+                        Click="BtnDelete_Click"/>
+                <Button x:Name="BtnHistory" 
+                        Content="📜 Purchase History" 
+                        Style="{StaticResource ActionButton}"
+                        Background="#2196F3"
+                        Click="BtnHistory_Click"/>
+            </StackPanel>
+        </Grid>
+
+        <!-- Customers DataGrid -->
+        <DataGrid Grid.Row="2" 
+                  x:Name="CustomersDataGrid"
+                  AutoGenerateColumns="False"
+                  IsReadOnly="True"
+                  SelectionMode="Single"
+                  CanUserAddRows="False"
+                  AlternatingRowBackground="#F5F5F5"
+                  RowBackground="White"
+                  GridLinesVisibility="None"
+                  HeadersVisibility="Column"
+                  BorderBrush="#DDD"
+                  BorderThickness="1"
+                  FontSize="13">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Binding="{Binding CustomerID}" Width="60"/>
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="*"/>
+                <DataGridTextColumn Header="Contact" Binding="{Binding Contact}" Width="130"/>
+                <DataGridTextColumn Header="Email" Binding="{Binding Email}" Width="*"/>
+                <DataGridTextColumn Header="Address" Binding="{Binding Address}" Width="*"/>
+                <DataGridTextColumn Header="Registration Date" 
+                                  Binding="{Binding RegistrationDate, StringFormat='yyyy-MM-dd'}" 
+                                  Width="130"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Page>

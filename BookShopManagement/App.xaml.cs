@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿using System.Windows;
 
 namespace BookShopManagement
@@ -14,3 +15,19 @@ namespace BookShopManagement
         }
     }
 }
+=======
+﻿using System.Configuration;
+using System.Data;
+using System.Windows;
+
+namespace BookShopManagement
+{
+    /// <summary>
+    /// Interaction logic for App.xaml
+    /// </summary>
+    public partial class App : Application
+    {
+    }
+
+}
+>>>>>>> c7afd23eabfc4eef251d52bc3c33511c70bac707

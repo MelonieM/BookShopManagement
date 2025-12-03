@@ -9,7 +9,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+<<<<<<< HEAD
     <PackageReference Include="Microsoft.Data.SqlClient" Version="6.1.3" />
+=======
+>>>>>>> c7afd23eabfc4eef251d52bc3c33511c70bac707
     <PackageReference Include="System.Data.SqlClient" Version="4.9.0" />
   </ItemGroup>
 

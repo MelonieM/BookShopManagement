@@ -67,6 +67,7 @@
 
                 <StackPanel VerticalAlignment="Center">
                     <TextBlock Text="📚 Book Shop Management System" 
+<<<<<<< HEAD
                      FontSize="26" 
                      FontWeight="Bold" 
                      Foreground="White"/>
@@ -132,6 +133,24 @@
                      Foreground="White" 
                      VerticalAlignment="Center"
                      Margin="15,0,0,0"/>
+=======
+                             FontSize="26" 
+                             FontWeight="Bold" 
+                             Foreground="White"/>
+                    <TextBlock x:Name="SubtitleText" 
+                             Text="Welcome! Select a module to get started" 
+                             FontSize="12" 
+                             Foreground="#E3F2FD"/>
+                </StackPanel>
+
+                <StackPanel Grid.Column="1" 
+                          Orientation="Horizontal" 
+                          VerticalAlignment="Center">
+                    <TextBlock x:Name="DateTimeText" 
+                             FontSize="12" 
+                             Foreground="White" 
+                             VerticalAlignment="Center"/>
+>>>>>>> c7afd23eabfc4eef251d52bc3c33511c70bac707
                 </StackPanel>
             </Grid>
         </Border>

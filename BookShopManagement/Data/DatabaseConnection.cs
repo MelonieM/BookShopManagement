@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 ﻿using Microsoft.Data.SqlClient;
+=======
+﻿using System.Data.SqlClient;
+>>>>>>> c7afd23eabfc4eef251d52bc3c33511c70bac707
 
 namespace BookShopManagement.Data
 {

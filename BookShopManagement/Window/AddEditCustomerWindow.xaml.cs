@@ -7,12 +7,20 @@ namespace BookShopManagement.Windows
     public partial class AddEditCustomerWindow : Window
     {
         public Customer Customer { get; private set; }
+<<<<<<< HEAD
         //private bool isEditMode;
+=======
+        private bool isEditMode;
+>>>>>>> c7afd23eabfc4eef251d52bc3c33511c70bac707
 
         public AddEditCustomerWindow()
         {
             InitializeComponent();
+<<<<<<< HEAD
            // isEditMode = false;
+=======
+            isEditMode = false;
+>>>>>>> c7afd23eabfc4eef251d52bc3c33511c70bac707
             Customer = new Customer();
             Title = "Add New Customer";
         }
@@ -20,7 +28,11 @@ namespace BookShopManagement.Windows
         public AddEditCustomerWindow(Customer customer)
         {
             InitializeComponent();
+<<<<<<< HEAD
           //  isEditMode = true;
+=======
+            isEditMode = true;
+>>>>>>> c7afd23eabfc4eef251d52bc3c33511c70bac707
             Customer = customer;
             Title = "Edit Customer";
             LoadCustomerData();

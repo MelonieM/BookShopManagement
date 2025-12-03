@@ -7,12 +7,20 @@ namespace BookShopManagement.Windows
     public partial class AddEditBookWindow : Window
     {
         public Book Book { get; private set; }
+<<<<<<< HEAD
         
+=======
+        private bool isEditMode;
+>>>>>>> c7afd23eabfc4eef251d52bc3c33511c70bac707
 
         public AddEditBookWindow()
         {
             InitializeComponent();
+<<<<<<< HEAD
             //isEditMode = false;
+=======
+            isEditMode = false;
+>>>>>>> c7afd23eabfc4eef251d52bc3c33511c70bac707
             Book = new Book();
             Title = "Add New Book";
         }
@@ -20,7 +28,11 @@ namespace BookShopManagement.Windows
         public AddEditBookWindow(Book book)
         {
             InitializeComponent();
+<<<<<<< HEAD
             //isEditMode = true;
+=======
+            isEditMode = true;
+>>>>>>> c7afd23eabfc4eef251d52bc3c33511c70bac707
             Book = book;
             Title = "Edit Book";
             LoadBookData();

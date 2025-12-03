@@ -2,18 +2,26 @@
 using System.Windows;
 using System.Windows.Threading;
 using BookShopManagement.Data;
+<<<<<<< HEAD
 using BookShopManagement.Models;
+=======
+>>>>>>> c7afd23eabfc4eef251d52bc3c33511c70bac707
 
 namespace BookShopManagement
 {
     public partial class MainWindow : Window
     {
+<<<<<<< HEAD
         private DispatcherTimer? timer;
+=======
+        private DispatcherTimer timer;
+>>>>>>> c7afd23eabfc4eef251d52bc3c33511c70bac707
 
         public MainWindow()
         {
             InitializeComponent();
 
+<<<<<<< HEAD
             // Check if user is logged in
             if (!CurrentUser.IsLoggedIn)
             {
@@ -29,14 +37,22 @@ namespace BookShopManagement
                 TxtUserRole.Text = CurrentUser.LoggedInUser.Role;
             }
 
+=======
+>>>>>>> c7afd23eabfc4eef251d52bc3c33511c70bac707
             // Test database connection on startup
             TestDatabaseConnection();
 
             InitializeTimer();
+<<<<<<< HEAD
             LoadDashboard();
 
             // Apply role-based permissions
             ApplyRolePermissions();
+=======
+
+            // Load Dashboard by default
+            LoadDashboard();
+>>>>>>> c7afd23eabfc4eef251d52bc3c33511c70bac707
         }
 
         private void TestDatabaseConnection()
@@ -46,8 +62,12 @@ namespace BookShopManagement
                 using (var conn = DatabaseConnection.GetConnection())
                 {
                     conn.Open();
+<<<<<<< HEAD
                     if (StatusText != null)
                         StatusText.Text = "Database connected successfully ✓";
+=======
+                    StatusText.Text = "Database connected successfully ✓";
+>>>>>>> c7afd23eabfc4eef251d52bc3c33511c70bac707
                 }
             }
             catch (Exception ex)
@@ -56,8 +76,12 @@ namespace BookShopManagement
                               "Database Error",
                               MessageBoxButton.OK,
                               MessageBoxImage.Error);
+<<<<<<< HEAD
                 if (StatusText != null)
                     StatusText.Text = "Database connection failed ✗";
+=======
+                StatusText.Text = "Database connection failed ✗";
+>>>>>>> c7afd23eabfc4eef251d52bc3c33511c70bac707
             }
         }
 
@@ -69,10 +93,16 @@ namespace BookShopManagement
             timer.Start();
         }
 
+<<<<<<< HEAD
         private void Timer_Tick(object? sender, EventArgs e)
         {
             if (DateTimeText != null)
                 DateTimeText.Text = DateTime.Now.ToString("MMM dd, yyyy | HH:mm:ss");
+=======
+        private void Timer_Tick(object sender, EventArgs e)
+        {
+            DateTimeText.Text = DateTime.Now.ToString("MMM dd, yyyy | HH:mm:ss");
+>>>>>>> c7afd23eabfc4eef251d52bc3c33511c70bac707
         }
 
         private void LoadDashboard()
@@ -80,8 +110,12 @@ namespace BookShopManagement
             try
             {
                 MainFrame.Navigate(new Pages.DashboardPage());
+<<<<<<< HEAD
                 if (StatusText != null)
                     StatusText.Text = "Dashboard loaded - Welcome!";
+=======
+                StatusText.Text = "Dashboard loaded";
+>>>>>>> c7afd23eabfc4eef251d52bc3c33511c70bac707
             }
             catch (Exception ex)
             {
@@ -90,6 +124,7 @@ namespace BookShopManagement
             }
         }
 
+<<<<<<< HEAD
         private void ApplyRolePermissions()
         {
             if (CurrentUser.LoggedInUser == null) return;
@@ -108,13 +143,19 @@ namespace BookShopManagement
             }
         }
 
+=======
+>>>>>>> c7afd23eabfc4eef251d52bc3c33511c70bac707
         private void BtnDashboard_Click(object sender, RoutedEventArgs e)
         {
             try
             {
                 MainFrame.Navigate(new Pages.DashboardPage());
+<<<<<<< HEAD
                 if (StatusText != null)
                     StatusText.Text = "Dashboard loaded";
+=======
+                StatusText.Text = "Dashboard loaded";
+>>>>>>> c7afd23eabfc4eef251d52bc3c33511c70bac707
             }
             catch (Exception ex)
             {
@@ -128,8 +169,12 @@ namespace BookShopManagement
             try
             {
                 MainFrame.Navigate(new Pages.BooksPage());
+<<<<<<< HEAD
                 if (StatusText != null)
                     StatusText.Text = "Book Management loaded";
+=======
+                StatusText.Text = "Book Management loaded";
+>>>>>>> c7afd23eabfc4eef251d52bc3c33511c70bac707
             }
             catch (Exception ex)
             {
@@ -143,8 +188,12 @@ namespace BookShopManagement
             try
             {
                 MainFrame.Navigate(new Pages.CustomersPage());
+<<<<<<< HEAD
                 if (StatusText != null)
                     StatusText.Text = "Customer Management loaded";
+=======
+                StatusText.Text = "Customer Management loaded";
+>>>>>>> c7afd23eabfc4eef251d52bc3c33511c70bac707
             }
             catch (Exception ex)
             {
@@ -157,19 +206,39 @@ namespace BookShopManagement
         {
             try
             {
+<<<<<<< HEAD
                 MainFrame.Navigate(new Pages.SalesPage());
+=======
+                if (MainFrame == null)
+                {
+                    MessageBox.Show("MainFrame is null!", "Error");
+                    return;
+                }
+
+                var salesPage = new Pages.SalesPage();
+                MainFrame.Navigate(salesPage);
+
+>>>>>>> c7afd23eabfc4eef251d52bc3c33511c70bac707
                 if (StatusText != null)
                     StatusText.Text = "Sales Processing loaded";
             }
             catch (Exception ex)
             {
+<<<<<<< HEAD
                 MessageBox.Show($"Error loading Sales page: {ex.Message}", "Error",
                               MessageBoxButton.OK, MessageBoxImage.Error);
+=======
+                MessageBox.Show($"Error: {ex.Message}\n\nStack: {ex.StackTrace}",
+                              "Error",
+                              MessageBoxButton.OK,
+                              MessageBoxImage.Error);
+>>>>>>> c7afd23eabfc4eef251d52bc3c33511c70bac707
             }
         }
 
         private void BtnReports_Click(object sender, RoutedEventArgs e)
         {
+<<<<<<< HEAD
             try
             {
                 MainFrame.Navigate(new Pages.ReportsPage());
@@ -181,6 +250,13 @@ namespace BookShopManagement
                 MessageBox.Show($"Error loading Reports page: {ex.Message}", "Error",
                               MessageBoxButton.OK, MessageBoxImage.Error);
             }
+=======
+            MessageBox.Show("Reports page will be added next!",
+                          "Coming Soon",
+                          MessageBoxButton.OK,
+                          MessageBoxImage.Information);
+            StatusText.Text = "Reports - Coming Soon";
+>>>>>>> c7afd23eabfc4eef251d52bc3c33511c70bac707
         }
 
         private void BtnExit_Click(object sender, RoutedEventArgs e)
@@ -195,6 +271,7 @@ namespace BookShopManagement
             }
         }
 
+<<<<<<< HEAD
         private void BtnLogout_Click(object sender, RoutedEventArgs e)
         {
             var result = MessageBox.Show(
@@ -224,3 +301,11 @@ namespace BookShopManagement
         }
     }
 }
+=======
+        public void UpdateStatus(string message)
+        {
+            StatusText.Text = message;
+        }
+    }
+}
+>>>>>>> c7afd23eabfc4eef251d52bc3c33511c70bac707

@@ -1,17 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-<<<<<<< HEAD
 using Microsoft.Data.SqlClient;
-=======
-using System.Data.SqlClient;
->>>>>>> c7afd23eabfc4eef251d52bc3c33511c70bac707
 using BookShopManagement.Models;
 
 namespace BookShopManagement.Data
 {
     public class ReportsRepository
     {
-<<<<<<< HEAD
         public SalesReport GetSalesReport(DateTime startDate, DateTime endDate)
         {
             var report = new SalesReport
@@ -79,8 +74,6 @@ namespace BookShopManagement.Data
             return report;
         }
 
-=======
->>>>>>> c7afd23eabfc4eef251d52bc3c33511c70bac707
         public List<LowStockBook> GetLowStockBooks(int threshold = 10)
         {
             var lowStockBooks = new List<LowStockBook>();
@@ -115,7 +108,6 @@ namespace BookShopManagement.Data
             return lowStockBooks;
         }
 
-<<<<<<< HEAD
         public Dictionary<string, int> GetTopSellingBooks(int topN = 10)
         {
             var topBooks = new Dictionary<string, int>();
@@ -143,8 +135,6 @@ namespace BookShopManagement.Data
             return topBooks;
         }
 
-=======
->>>>>>> c7afd23eabfc4eef251d52bc3c33511c70bac707
         public decimal GetTotalRevenueToday()
         {
             using (var conn = DatabaseConnection.GetConnection())
@@ -161,8 +151,4 @@ namespace BookShopManagement.Data
             }
         }
     }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> c7afd23eabfc4eef251d52bc3c33511c70bac707

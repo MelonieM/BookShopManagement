@@ -1,10 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-<<<<<<< HEAD
-using Microsoft.Data.SqlClient;
-=======
-using System.Data.SqlClient;
->>>>>>> c7afd23eabfc4eef251d52bc3c33511c70bac707
+using Microsoft.Data.SqlClient; // Using Microsoft.Data.SqlClient
 using BookShopManagement.Models;
 
 namespace BookShopManagement.Data
@@ -30,11 +26,7 @@ namespace BookShopManagement.Data
             return books;
         }
 
-<<<<<<< HEAD
         public Book? GetBookByID(int bookID)
-=======
-        public Book GetBookByID(int bookID)
->>>>>>> c7afd23eabfc4eef251d52bc3c33511c70bac707
         {
             using (var conn = DatabaseConnection.GetConnection())
             {

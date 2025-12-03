@@ -11,11 +11,7 @@ namespace BookShopManagement.Models
         public decimal TotalAmount { get; set; }
         public decimal DiscountPercent { get; set; }
         public decimal FinalAmount { get; set; }
-<<<<<<< HEAD
         public string? PaymentMethod { get; set; }
-=======
-        public string PaymentMethod { get; set; }
->>>>>>> c7afd23eabfc4eef251d52bc3c33511c70bac707
         public List<SaleItem> Items { get; set; } = new List<SaleItem>();
 
         public void CalculateTotals()

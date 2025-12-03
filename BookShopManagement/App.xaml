@@ -1,13 +1,10 @@
 ﻿<Application x:Class="BookShopManagement.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-<<<<<<< HEAD
-             xmlns:local="clr-namespace:BookShopManagement">
-=======
              xmlns:local="clr-namespace:BookShopManagement"
              StartupUri="MainWindow.xaml">
->>>>>>> c7afd23eabfc4eef251d52bc3c33511c70bac707
+
     <Application.Resources>
-         
+        <!-- You can add shared resources here -->
     </Application.Resources>
 </Application>

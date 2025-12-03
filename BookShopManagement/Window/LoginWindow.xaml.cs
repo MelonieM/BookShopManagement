@@ -1,158 +1,157 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Input;
-using BookShopManagement.Data;
+using System.Security.Cryptography;
+using System.Text;
+using Microsoft.Data.SqlClient;
 using BookShopManagement.Models;
 
 namespace BookShopManagement
 {
     public partial class LoginWindow : Window
     {
-        private UserRepository userRepo;
-
         public LoginWindow()
         {
             InitializeComponent();
-            userRepo = new UserRepository();
             TxtUsername.Focus();
-
-            // Test database connection on load
-            TestDatabaseConnection();
-        }
-
-        private void TestDatabaseConnection()
-        {
-            try
-            {
-                using (var conn = DatabaseConnection.GetConnection())
-                {
-                    conn.Open();
-                    // Connection successful
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"⚠️ Database Connection Error:\n\n{ex.Message}\n\nPlease check:\n1. SQL Server is running\n2. Database 'BookShopDB' exists\n3. Users table exists",
-                              "Database Error",
-                              MessageBoxButton.OK,
-                              MessageBoxImage.Error);
-            }
         }
 
         private void BtnLogin_Click(object sender, RoutedEventArgs e)
         {
-            AttemptLogin();
+            Login();
         }
 
         private void TxtPassword_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter)
             {
-                AttemptLogin();
+                Login();
             }
         }
 
-        private void LinkForgotPassword_Click(object sender, RoutedEventArgs e)
+        private void BtnTest_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show(
-                "Password Recovery:\n\n" +
-                "Please contact your system administrator to reset your password.\n\n" +
-                "Default Passwords:\n" +
-                "• admin: admin123\n" +
-                "• manager: manager123\n" +
-                "• cashier: cashier123",
-                "Forgot Password",
-                MessageBoxButton.OK,
-                MessageBoxImage.Information);
-        }
-
-        private void AttemptLogin()
-        {
-            // Clear previous error
             TxtError.Text = "";
 
-            // Validate input
+            try
+            {
+                string connStr = "Server=(localdb)\\projectModels;Database=BookShopDB;Integrated Security=true;";
+                using (var conn = new SqlConnection(connStr))
+                {
+                    conn.Open();
+
+                    var cmd = new SqlCommand("SELECT COUNT(*) FROM Users", conn);
+                    int count = (int)cmd.ExecuteScalar();
+
+                    MessageBox.Show($"SUCCESS!\n\nDatabase connected.\nFound {count} users.\n\nYou can now login.", "Test Passed");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Database Error:\n\n{ex.Message}\n\nMake sure:\n1. SQL Server is running\n2. BookShopDB exists\n3. Users table exists", "Test Failed");
+            }
+        }
+
+        private void Login()
+        {
+            TxtError.Text = "";
+
             string username = TxtUsername.Text.Trim();
             string password = TxtPassword.Password;
 
             if (string.IsNullOrEmpty(username))
             {
-                TxtError.Text = "❌ Please enter username";
-                TxtUsername.Focus();
+                TxtError.Text = "Enter username";
                 return;
             }
 
             if (string.IsNullOrEmpty(password))
             {
-                TxtError.Text = "❌ Please enter password";
-                TxtPassword.Focus();
+                TxtError.Text = "Enter password";
                 return;
             }
 
             try
             {
-                // Disable login button during authentication
                 BtnLogin.IsEnabled = false;
-                BtnLogin.Content = "⏳ Logging in...";
-                BtnLogin.Background = System.Windows.Media.Brushes.Gray;
+                BtnLogin.Content = "Logging in...";
 
-                // Show what we're trying to authenticate
-                System.Diagnostics.Debug.WriteLine($"Attempting login with: {username}");
+                // Hash password
+                string hash = GetMD5Hash(password);
 
-                // Authenticate user
-                var user = userRepo.AuthenticateUser(username, password);
-
-                if (user != null)
+                // Connect to database
+                string connStr = "Server=(localdb)\\projectModels;Database=BookShopDB;Integrated Security=true;";
+                using (var conn = new SqlConnection(connStr))
                 {
-                    // Success!
-                    System.Diagnostics.Debug.WriteLine($"Login successful for: {user.FullName} ({user.Role})");
+                    conn.Open();
 
-                    // Set current user
-                    CurrentUser.LoggedInUser = user;
+                    string query = @"SELECT UserID, Username, FullName, Role, IsActive 
+                                    FROM Users 
+                                    WHERE Username = @Username 
+                                    AND PasswordHash = @Hash 
+                                    AND IsActive = 1";
 
-                    // Show success message
-                    MessageBox.Show(
-                        $"✅ Welcome, {user.FullName}!\n\nRole: {user.Role}",
-                        "Login Successful",
-                        MessageBoxButton.OK,
-                        MessageBoxImage.Information);
+                    using (var cmd = new SqlCommand(query, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@Username", username);
+                        cmd.Parameters.AddWithValue("@Hash", hash);
 
-                    // Show main window
-                    MainWindow mainWindow = new MainWindow();
-                    mainWindow.Show();
+                        using (var reader = cmd.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                // Login successful
+                                var user = new User
+                                {
+                                    UserID = reader.GetInt32(0),
+                                    Username = reader.GetString(1),
+                                    FullName = reader.GetString(2),
+                                    Role = reader.GetString(3),
+                                    IsActive = reader.GetBoolean(4)
+                                };
 
-                    // Close login window
-                    this.Close();
-                }
-                else
-                {
-                    // Failed
-                    System.Diagnostics.Debug.WriteLine("Login failed - Invalid credentials");
+                                CurrentUser.LoggedInUser = user;
 
-                    TxtError.Text = "❌ Invalid username or password!\n\nPlease check the credentials below.";
-                    TxtPassword.Password = "";
-                    TxtUsername.Focus();
-                    TxtUsername.SelectAll();
+                                MessageBox.Show($"Welcome, {user.FullName}!\n\nRole: {user.Role}", "Login Success");
+
+                                MainWindow mainWindow = new MainWindow();
+                                mainWindow.Show();
+                                this.Close();
+                            }
+                            else
+                            {
+                                TxtError.Text = "Invalid username or password!";
+                                TxtPassword.Password = "";
+                            }
+                        }
+                    }
                 }
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.WriteLine($"Login error: {ex.Message}");
-
-                TxtError.Text = "❌ Login Error!";
-                MessageBox.Show(
-                    $"Error during login:\n\n{ex.Message}\n\n" +
-                    $"Stack Trace:\n{ex.StackTrace}",
-                    "Login Error",
-                    MessageBoxButton.OK,
-                    MessageBoxImage.Error);
+                TxtError.Text = "Login failed!";
+                MessageBox.Show($"Error: {ex.Message}", "Login Error");
             }
             finally
             {
-                // Re-enable login button
                 BtnLogin.IsEnabled = true;
-                BtnLogin.Content = "🔐 LOGIN";
-                BtnLogin.Background = (System.Windows.Media.Brush)new System.Windows.Media.BrushConverter().ConvertFrom("#4CAF50");
+                BtnLogin.Content = "LOGIN";
+            }
+        }
+
+        private string GetMD5Hash(string input)
+        {
+            using (MD5 md5 = MD5.Create())
+            {
+                byte[] inputBytes = Encoding.ASCII.GetBytes(input);
+                byte[] hashBytes = md5.ComputeHash(inputBytes);
+
+                StringBuilder sb = new StringBuilder();
+                for (int i = 0; i < hashBytes.Length; i++)
+                {
+                    sb.Append(hashBytes[i].ToString("x2"));
+                }
+                return sb.ToString();
             }
         }
     }

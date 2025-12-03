@@ -1,10 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-<<<<<<< HEAD
 using Microsoft.Data.SqlClient;
-=======
-using System.Data.SqlClient;
->>>>>>> c7afd23eabfc4eef251d52bc3c33511c70bac707
 using BookShopManagement.Models;
 
 namespace BookShopManagement.Data
@@ -14,7 +10,7 @@ namespace BookShopManagement.Data
         // CREATE SALE
         public int CreateSale(Sale sale)
         {
-            var bookRepo = new BookRepository(); // Create here instead
+            var bookRepo = new BookRepository();
 
             using (var conn = DatabaseConnection.GetConnection())
             {

@@ -5,7 +5,6 @@ namespace BookShopManagement.Models
     public class Book
     {
         public int BookID { get; set; }
-<<<<<<< HEAD
         public string ISBN { get; set; } = string.Empty;
         public string Title { get; set; } = string.Empty;
         public string Author { get; set; } = string.Empty;
@@ -13,15 +12,6 @@ namespace BookShopManagement.Models
         public int StockQuantity { get; set; }
         public string? Category { get; set; }
         public string? Publisher { get; set; }
-=======
-        public string ISBN { get; set; }
-        public string Title { get; set; }
-        public string Author { get; set; }
-        public decimal Price { get; set; }
-        public int StockQuantity { get; set; }
-        public string Category { get; set; }
-        public string Publisher { get; set; }
->>>>>>> c7afd23eabfc4eef251d52bc3c33511c70bac707
         public int? PublishedYear { get; set; }
         public DateTime CreatedDate { get; set; }
         public DateTime UpdatedDate { get; set; }
@@ -31,8 +21,4 @@ namespace BookShopManagement.Models
             return $"[{ISBN}] {Title} by {Author} - ${Price} (Stock: {StockQuantity})";
         }
     }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> c7afd23eabfc4eef251d52bc3c33511c70bac707

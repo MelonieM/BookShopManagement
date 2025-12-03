@@ -11,15 +11,15 @@ The Book Shop Management System is a full-featured desktop application designed 
 A00314636, Melonie Matho M
 
 
-# Key Features
+## Key Features
 
-1. Authentication & Security
+### 1. Authentication & Security
 - User Login System : Secure authentication with password hashing
 - Role-Based Access Control: Admin, Manager, and Cashier roles
 - Session Management: Track logged-in users and login history
 - Logout Functionality: Secure session termination
 
-2. Dashboard
+### 2. Dashboard
 - Real-time statistics overview
 - Today's revenue tracking
 - Total books and customers count
@@ -27,7 +27,7 @@ A00314636, Melonie Matho M
 - Recent sales display
 - Quick action buttons
 
-3. Book Management
+### 3. Book Management
 - Add, edit, and delete books
 - ISBN, title, author, price, category tracking
 - Stock quantity management
@@ -36,14 +36,14 @@ A00314636, Melonie Matho M
 - Bulk stock updates
 - Real-time inventory tracking
 
-4. Customer Management
+### 4. Customer Management
 - Customer registration and profiles
 - Contact information management
 - Email and address tracking
 - Purchase history viewing
 - Customer relationship tracking
 
-5. Sales Processing 
+### 5. Sales Processing 
 - Interactive shopping cart
 - Add/remove items with quantity control
 - Automatic stock deduction
@@ -53,7 +53,7 @@ A00314636, Melonie Matho M
 - Real-time total calculation
 - Transaction recording
 
-6. Reports & Analytics
+### 6. Reports & Analytics
 - Today's Sales Report
 - Date Range Reports
 - Low Stock Alerts
@@ -61,7 +61,7 @@ A00314636, Melonie Matho M
 - Revenue Summary 
 
 
-7. User Management (Admin Only)
+### 7. User Management (Admin Only)
 - Add and edit users
 - Assign roles (Admin/Manager/Cashier)
 - Activate/deactivate accounts
@@ -69,7 +69,7 @@ A00314636, Melonie Matho M
 - View login history
 
 
-# Technology 
+## Technology 
 
 Framework : .NET 6.0+ / WPF 
 Language  : C# 10.0 
@@ -81,7 +81,7 @@ Security : MD5 Password Hashing (demo - upgrade to bcrypt)
 
 
 
-# Installation & Setup
+## Installation & Setup
 
 Prerequisites
 
@@ -91,13 +91,13 @@ Prerequisites
 - SQL Server Management Studio (SSMS) - Optional but recommended
 - .NET 6.0 SDK or higher
 
-## Step 1: Clone or Download
+#### Step 1: Clone or Download
 
 Clone the repository (if using Git)
 git clone https://github.com/yourusername/BookShopManagement.git
 
 
-## Step 2: Install Dependencies
+#### Step 2: Install Dependencies
 
 1. Open Visual Studio 2022
 2. Open the solution: `BookShopManagement.sln
@@ -108,7 +108,7 @@ git clone https://github.com/yourusername/BookShopManagement.git
    Install
    
 
-## Step 3: Create Database
+#### Step 3: Create Database
 
 1. Open SQL Server Management Studio (SSMS)
 2. Connect to**: `(localdb)\projectModels` or your SQL Server instance
@@ -118,7 +118,7 @@ git clone https://github.com/yourusername/BookShopManagement.git
    GO
    
 
-## Step 4: Run Database Scripts
+#### Step 4: Run Database Scripts
 
 Execute these scripts in order:
 
@@ -134,7 +134,7 @@ Run all table creation scripts provided in the project
 See /Database/CreateTables.sql for complete script
 
 
-## Step 5: Update Connection String
+#### Step 5: Update Connection String
 
 Open "Data/DatabaseConnection.cs" and update:
 
@@ -143,14 +143,14 @@ private static string connectionString =
     "Server=(localdb)\\projectModels;Database=BookShopDB;Integrated Security=true;";
 
 
-## Step 6: Build and Run
+#### Step 6: Build and Run
 
 1. Clean Solution: Build → Clean Solution
 2. Rebuild Solution: Ctrl + Shift + B
 3. Run: 'F5' or Start
 
 
-# Recommended Upgrades for Production
+## Recommended Upgrades for Production
 - Upgrade to bcrypt or Argon2 password hashing
 - Implement HTTPS for network communication
 - Add account lockout after failed login attempts
@@ -160,7 +160,7 @@ private static string connectionString =
 
 
 
-# Future Enhancements
+## Future Enhancements
 
 ## Planned Features
 - Barcode Scanning
@@ -178,7 +178,7 @@ private static string connectionString =
 
 
 
-# Acknowledgments
+## Acknowledgments
 
 - Microsoft- .NET Framework and WPF
 - SQL Server - Robust database management
